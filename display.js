@@ -220,7 +220,7 @@ function sendMessage(text) {
                 console.log(response);
                 interpretTT(response['candidates'][0].code);
             } else {
-                // dialogueMessage("Sorry, I didn't understand that. Please try again", "bot")
+                $('.status-msg').text("Sorry, I didn't understand that. Please try again.").css('visibility', 'visible');
                 console.log(response);
             }
         },
