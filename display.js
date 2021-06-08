@@ -190,18 +190,21 @@ function convertFunc(text) {
 }
 
 async function interpretTT(code) {
+
     let func = convertFunc(code[7]);
     let text = code.slice(12,-3);
-    console.log(func, text);
 
     let loc = '';
     text.map(x => loc += x + ' ');
     loc = interpret_location(loc);
+    $('.status-msg').text(`Loading ${camelToTitle(func)} for ${loc.canonical}...`)
+                    .css('visibility', 'visible');
     let data = await pullData(loc.type, loc.name);
     if (func === 'caseDensity' || func === 'icuCapacityRatio' || func === 'infectionRate' || func === 'testPositivityRatio')
         chart(data.metricsTimeseries.slice(0,-1), func, loc.canonical + ' ' + camelToTitle(func));
     else
         chart(data.actualsTimeseries.slice(0,-1), func, loc.canonical + ' ' + camelToTitle(func));
+    $('.status-msg').text("_").css('visibility', 'hidden');
 }
 
 function sendMessage(text) {
