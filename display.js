@@ -208,6 +208,7 @@ async function interpretTT(code) {
 }
 
 function sendMessage(text) {
+    $('.status-msg').text(`Interpreting your command...`).css('visibility', 'visible');
     let urlEndpoint = "https://nlp-staging.almond.stanford.edu/@org.thingpedia.models.covid/en-US/query?"
     $.ajax({
         'url' : urlEndpoint,
